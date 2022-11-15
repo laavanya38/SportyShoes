@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+<title>Cart</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/92e9dde9ec.js" crossorigin="anonymous"></script>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+        <div class="container">
+            <a href="/" class="navbar-brand text-warning fw-bold fs-2 animate__animated animate__bounce">Sporty Shoes</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a th:href="@{/registration}" class="nav-link lead px-3"><i class="fas fa-user-plus"></i>Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/adminregistration}" class="nav-link lead px-3"><i class="fas fa-user-cog"></i>Admin</a>
+                    </li>
+                    <li class="nav-item">
+                        <a th:href="@{/cart}" class="nav-link lead px-3"><i class="fas fa-shopping-cart"></i>Cart</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                    	<span th:text=${cartCount} class="nav-link lead px-3">0</span >
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    
+    <!-- Billing Details -->
+    <section class="bg-dark text-light p-5 p-lg-0 pt-lg-4 text-center text-sm-start">
+        <div class="container">
+            <div class="d-sm-flex align-items-center justify-content-around">
+                <divclass="ml-4 pl-4">
+				 <div class="card">
+  <div class="card-header text-dark">
+    <p class="alert alert-info lead">Order Placed Successfully!</p >
+  </div>
+  <div class="card-body text-dark" th:each="prod : ${cart}">
+      <p class="card-text">Product Name : <span th:text=${prod.productName}></span ></p>
+    <p class="card-text"> Order ID : 12345678 </p>
+    <h5 class="card-title">Total Amount Paid: <span th:text=${total}></span ></h5>
+    <a href="/" class="btn btn-primary">Shop More</a>
+  </div>
+</div>
+                </div>
+            
+        </div>
+    </section>
+    
+        <!-- Footer -->
+    <footer class="p-3 bg-secondary text-center text-white position-relative">
+        <div class="container">
+            <p class="lead"> Copyright &copy 2021 Nikhil Jain </p>
+            <a href="#" class="position-absolute bottom-0 end-0 p-5">
+                <i class="bi bi-arrow-up-circle h1"></i>
+            </a>
+        </div>
+    </footer>
+    
+</body>
